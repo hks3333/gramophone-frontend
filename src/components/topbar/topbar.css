@@ -1,0 +1,9 @@
+
+
+.logo {
+    z-index: 100;
+    padding: 0px 24px;
+    font-size:4rem;
+    font-family: "Diplomata SC", serif;
+    background-color: aquamarine;
+}
