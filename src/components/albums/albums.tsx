@@ -6,7 +6,7 @@ import { albums, Album } from '@/lib/library';
 import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 
 const Albums: FC = () => {
-    const audioPlayer = useAudioPlayer();
+    const audioPlayer = useAudioPlayer(); 
 
     const handlePlayAlbum = (album: Album) => {
         if (album.songs.length > 0) {
@@ -26,11 +26,11 @@ const Albums: FC = () => {
     };
 
     return (
-        <div className='albm flex flex-col pb-6 pt-4 px-4 mt-6 border-t-3 border-b-3 border-black w-full'>
-            <div className='album-title'>
+        <div className='albm flex flex-col pb-6 pt-4 px-4 mt-6'>
+            <div className='album-title text-center text-2xl font-bold'>
                 Featured Albums
             </div>
-            <div className="flex flex-wrap gap-8">
+            <div className="flex flex-wrap gap-8 mt-8 mb-8 w-full justify-center">
                 {albums.map((album) => (
                     <VinylCover 
                         key={`${album.name}-${album.artist}`}

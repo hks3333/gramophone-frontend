@@ -135,26 +135,9 @@ export const PlayerDrawer = () => {
               
               {/* Controls */}
               <div className="flex items-center gap-4" onClick={handleControlClick}>
-                <button 
-                  onClick={toggleMute}
-                  className="text-muted-foreground hover:text-foreground transition"
-                >
-                  {isMuted || volume === 0 ? (
-                    <VolumeX size={16} />
-                  ) : (
-                    <Volume2 size={16} />
-                  )}
-                </button>
+                
 
-                <div 
-                  className="w-24 h-2 bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition"
-                  onClick={handleVolumeChange}
-                >
-                  <div 
-                    className="h-full bg-primary rounded-full" 
-                    style={{ width: `${volume * 100}%` }}
-                  />
-                </div>
+                
 
                 <button 
                   onClick={handlePrevious}
@@ -183,8 +166,29 @@ export const PlayerDrawer = () => {
                   <SkipForward size={20} />
                 </button>
 
+                <button 
+                  onClick={toggleMute}
+                  className="text-muted-foreground hover:text-foreground transition ml-4"
+                >
+                  {isMuted || volume === 0 ? (
+                    <VolumeX size={16} />
+                  ) : (
+                    <Volume2 size={16} />
+                  )}
+                </button>
+                
+                <div 
+                  className="w-28 h-2 bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition"
+                  onClick={handleVolumeChange}
+                >
+                  <div 
+                    className="h-full bg-primary rounded-full" 
+                    style={{ width: `${volume * 100}%` }}
+                  />
+                </div>
+
                 {/* Volume controls row */}
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                   <button 
                     onClick={toggleMute}
                     className="text-muted-foreground hover:text-foreground transition"
@@ -205,7 +209,7 @@ export const PlayerDrawer = () => {
                       style={{ width: `${volume * 100}%` }}
                     />
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             
