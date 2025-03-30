@@ -15,6 +15,7 @@ interface AudioPlayerState {
   };
   playlist: PlaylistItem[];
   currentTrackIndex: number;
+  isExpanded: boolean;
 }
 
 interface PlaylistItem {
@@ -54,6 +55,7 @@ class AudioPlayer {
       currentUrl: undefined,
       playlist: [],
       currentTrackIndex: -1,
+      isExpanded: false,
     };
   }
 
@@ -189,6 +191,7 @@ class AudioPlayer {
           palette: track.songInfo.palette
         }
       });
+      this.setExpanded(true);
     }
   }
 
@@ -211,6 +214,10 @@ class AudioPlayer {
     });
     await this.playTrack(prevIndex);
   }
+
+  public setExpanded(expanded: boolean) {
+    this.updateState({ isExpanded: expanded });
+  }
 }
 
 export const useAudioPlayer = () => {
@@ -232,6 +239,8 @@ export const useAudioPlayer = () => {
     next: () => player.next(),
     previous: () => player.previous(),
     setPlaylist: (songs: PlaylistItem[]) => player.setPlaylist(songs),
-    playTrack: (index: number) => player.playTrack(index)
+    playTrack: (index: number) => player.playTrack(index),
+    isExpanded: state.isExpanded,
+    setExpanded: (expanded: boolean) => player.setExpanded(expanded),
   };
 }; 

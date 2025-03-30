@@ -4,16 +4,13 @@ import {
   DrawerTrigger,
   DrawerContent,
 } from "@/components/ui/drawer";
-import "./playercontrols.css"
+import "./Playercontrols.css"
 import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 import { Blurhash } from "react-blurhash";
 import { GradientBackground } from '@/components/GradientBackground';
 import { Volume2, VolumeX, SkipBack, SkipForward, Play, Pause } from 'lucide-react';
 
 export const PlayerDrawer = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const coverImageRef = useRef<HTMLImageElement>(null);
   const { 
     isPlaying, 
     currentTime, 
@@ -27,8 +24,12 @@ export const PlayerDrawer = () => {
     playlist,
     currentTrackIndex,
     seek,
-    setVolume
+    setVolume,
+    isExpanded,
+    setExpanded
   } = useAudioPlayer();
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const coverImageRef = useRef<HTMLImageElement>(null);
   const [isMuted, setIsMuted] = useState(false);
   const previousVolume = useRef(volume);
   
@@ -95,7 +96,7 @@ export const PlayerDrawer = () => {
       <Drawer 
         direction="bottom" 
         open={isExpanded} 
-        onOpenChange={setIsExpanded}
+        onOpenChange={setExpanded}
       >
         <DrawerTrigger asChild>
           {/* Mini Player */}
@@ -238,7 +239,7 @@ export const PlayerDrawer = () => {
             )}
             {/* Header with close button */}
             <div className="flex justify-end mb-4 ">
-              <button onClick={() => setIsExpanded(false)}>
+              <button onClick={() => setExpanded(false)}>
                 Close
               </button>
             </div>
@@ -276,7 +277,7 @@ export const PlayerDrawer = () => {
               {/* Progress Bar */}
               <div className="w-full max-w-md space-y-2">
                 <div 
-                  className="relative h-2 w-full bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition"
+                  className="relative h-4 w-full bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition"
                   onClick={handleSeek}
                 >
                   <div 
@@ -336,7 +337,7 @@ export const PlayerDrawer = () => {
                   </button>
 
                   <div 
-                    className="w-32 h-1 bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition"
+                    className="w-36 h-2 bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition"
                     onClick={handleVolumeChange}
                   >
                     <div 
