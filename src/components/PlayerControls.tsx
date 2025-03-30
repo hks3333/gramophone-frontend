@@ -4,7 +4,7 @@ import {
   DrawerTrigger,
   DrawerContent,
 } from "@/components/ui/drawer";
-import "./Playercontrols.css"
+import "./PlayerControls.css"
 import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 import { Blurhash } from "react-blurhash";
 import { GradientBackground } from '@/components/GradientBackground';
