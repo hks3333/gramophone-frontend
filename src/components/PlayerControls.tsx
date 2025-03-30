@@ -26,7 +26,8 @@ export const PlayerDrawer = () => {
     seek,
     setVolume,
     isExpanded,
-    setExpanded
+    setExpanded,
+    playTrack
   } = useAudioPlayer();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const coverImageRef = useRef<HTMLImageElement>(null);
@@ -233,122 +234,171 @@ export const PlayerDrawer = () => {
         </DrawerTrigger>
 
         {/* Expanded Player */}
-        <DrawerContent className="h-[100dvh] p-0 max-h-none mt-0 ">
-          <div className="flex flex-col h-[100dvh] p-6 relative ">
+        <DrawerContent className="h-[100dvh] p-0 max-h-none mt-0">
+          <div className="flex h-[100dvh] relative">
             {isExpanded && (
               <GradientBackground 
                 isPlaying={isPlaying} 
                 palette={currentSong?.palette || []}
               />
             )}
-            {/* Header with close button */}
-            <div className="flex justify-end mb-4 ">
-              <button onClick={() => setExpanded(false)}>
-                Close
-              </button>
-            </div>
+            
+            {/* Left side - Player */}
+            <div className="flex-1 flex flex-col p-6">
+              {/* Header with close button */}
+              <div className="flex justify-end mb-4">
+                <button onClick={() => setExpanded(false)}>
+                  Close
+                </button>
+              </div>
 
-            {/* Main content */}
-            <div className="flex flex-col items-center flex-1 gap-8 mt-8">
-              {/* Album Art */}
-              <div className="w-78 h-78 rounded-lg overflow-hidden">
-                {!isImageLoaded && (
-                  <div className="w-full h-full">
-                    <Blurhash
-                      hash="LEHV6nWB2yk8pyo0adR*.7kCMdnj"
-                      width={256}
-                      height={256}
-                      resolutionX={32}
-                      resolutionY={32}
-                      punch={1}
-                    />
-                  </div>
-                )}
-                <img 
-                  className={`w-full h-full object-cover ${isImageLoaded ? "visible" : "hidden"}`}
-                  src={currentSong?.coverUrl}
-                  alt={currentSong?.name}
-                  onLoad={() => setIsImageLoaded(true)}
-                />
-              </div>
-              
-              {/* Track Info */}
-              <div className="text-center">
-                <h2 className="text-2xl font-bold">{currentSong?.name || 'No track playing'}</h2>
-                <p className="text-muted-foreground">{currentSong?.artist || 'Select a track'}</p>
-              </div>
-              
-              {/* Progress Bar */}
-              <div className="w-full max-w-md space-y-2">
-                <div 
-                  className="relative h-4 w-full bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition"
-                  onClick={handleSeek}
-                >
-                  <div 
-                    className="absolute h-full bg-primary rounded-full" 
-                    style={{ width: `${progress}%` }}
+              {/* Main content */}
+              <div className="flex flex-col items-center flex-1 gap-8 mt-8">
+                {/* Album Art */}
+                <div className="w-78 h-78 rounded-lg overflow-hidden">
+                  {!isImageLoaded && (
+                    <div className="w-full h-full">
+                      <Blurhash
+                        hash="LEHV6nWB2yk8pyo0adR*.7kCMdnj"
+                        width={256}
+                        height={256}
+                        resolutionX={32}
+                        resolutionY={32}
+                        punch={1}
+                      />
+                    </div>
+                  )}
+                  <img 
+                    className={`w-full h-full object-cover ${isImageLoaded ? "visible" : "hidden"}`}
+                    src={currentSong?.coverUrl}
+                    alt={currentSong?.name}
+                    onLoad={() => setIsImageLoaded(true)}
                   />
                 </div>
-                <div className="flex justify-between text-sm text-muted-foreground">
-                  <span>{formatTime(currentTime)}</span>
-                  <span>{formatTime(duration)}</span>
+                
+                {/* Track Info */}
+                <div className="text-center">
+                  <h2 className="text-2xl font-bold">{currentSong?.name || 'No track playing'}</h2>
+                  <p className="text-muted-foreground">{currentSong?.artist || 'Select a track'}</p>
                 </div>
-              </div>
-              
-              {/* Controls */}
-              <div className="flex flex-col items-center gap-6">
-                {/* Main controls row */}
-                <div className="flex items-center gap-8">
-                  <button 
-                    onClick={handlePrevious}
-                    disabled={currentTrackIndex <= 0}
-                    className="disabled:opacity-50 hover:text-primary transition"
-                  >
-                    <SkipBack size={24} />
-                  </button>
-                  
-                  <button 
-                    onClick={handlePlayPause}
-                    className="p-3 rounded-full bg-primary hover:bg-primary/90 transition"
-                  >
-                    {isPlaying ? (
-                      <Pause size={24} fill="white" />
-                    ) : (
-                      <Play size={24} fill="white" />
-                    )}
-                  </button>
-                  
-                  <button 
-                    onClick={handleNext}
-                    disabled={currentTrackIndex >= playlist.length - 1}
-                    className="disabled:opacity-50 hover:text-primary transition"
-                  >
-                    <SkipForward size={24} />
-                  </button>
-                </div>
-
-                {/* Volume controls row */}
-                <div className="flex items-center gap-4">
-                  <button 
-                    onClick={toggleMute}
-                    className="text-muted-foreground hover:text-foreground transition"
-                  >
-                    {isMuted || volume === 0 ? (
-                      <VolumeX size={20} />
-                    ) : (
-                      <Volume2 size={20} />
-                    )}
-                  </button>
-
+                
+                {/* Progress Bar */}
+                <div className="w-full max-w-md space-y-2">
                   <div 
-                    className="w-36 h-2 bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition"
-                    onClick={handleVolumeChange}
+                    className="relative h-4 w-full bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition"
+                    onClick={handleSeek}
                   >
                     <div 
-                      className="h-full bg-primary rounded-full" 
-                      style={{ width: `${volume * 100}%` }}
+                      className="absolute h-full bg-primary rounded-full" 
+                      style={{ width: `${progress}%` }}
                     />
                   </div>
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>{formatTime(currentTime)}</span>
+                    <span>{formatTime(duration)}</span>
+                  </div>
+                </div>
+                
+                {/* Controls */}
+                <div className="flex flex-col items-center gap-6">
+                  {/* Main controls row */}
+                  <div className="flex items-center gap-8">
+                    <button 
+                      onClick={handlePrevious}
+                      disabled={currentTrackIndex <= 0}
+                      className="disabled:opacity-50 hover:text-primary transition"
+                    >
+                      <SkipBack size={24} />
+                    </button>
+                    
+                    <button 
+                      onClick={handlePlayPause}
+                      className="p-3 rounded-full bg-primary hover:bg-primary/90 transition"
+                    >
+                      {isPlaying ? (
+                        <Pause size={24} fill="white" />
+                      ) : (
+                        <Play size={24} fill="white" />
+                      )}
+                    </button>
+                    
+                    <button 
+                      onClick={handleNext}
+                      disabled={currentTrackIndex >= playlist.length - 1}
+                      className="disabled:opacity-50 hover:text-primary transition"
+                    >
+                      <SkipForward size={24} />
+                    </button>
+                  </div>
+
+                  {/* Volume controls row */}
+                  <div className="flex items-center gap-4">
+                    <button 
+                      onClick={toggleMute}
+                      className="text-muted-foreground hover:text-foreground transition"
+                    >
+                      {isMuted || volume === 0 ? (
+                        <VolumeX size={20} />
+                      ) : (
+                        <Volume2 size={20} />
+                      )}
+                    </button>
+
+                    <div 
+                      className="w-36 h-2 bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition"
+                      onClick={handleVolumeChange}
+                    >
+                      <div 
+                        className="h-full bg-primary rounded-full" 
+                        style={{ width: `${volume * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right side - Playlist */}
+            <div className="hidden md:block w-96 border-l border-border bg-background/80 backdrop-blur-sm flex flex-col">
+              <div className="p-6 flex-1 overflow-y-auto">
+                <h3 className="text-lg font-semibold mb-4">{currentSong?.artist || 'Playlist'}</h3>
+                <div className="space-y-2">
+                  {playlist.map((track, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        playTrack(index);
+                      }}
+                      className={`w-full p-3 rounded-lg flex items-center gap-3 transition ${
+                        index === currentTrackIndex
+                          ? 'bg-primary/10 text-primary'
+                          : 'hover:bg-accent'
+                      }`}
+                    >
+                      <div className="w-10 h-10 rounded-sm overflow-hidden">
+                        <img
+                          src={track.songInfo.coverUrl}
+                          alt={track.songInfo.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 text-left">
+                        <p className="font-medium truncate">{track.songInfo.name}</p>
+                        <p className="text-sm text-muted-foreground truncate">
+                          {track.songInfo.artist}
+                        </p>
+                      </div>
+                      {index === currentTrackIndex && (
+                        <div className="text-primary">
+                          {isPlaying ? (
+                            <Pause size={16} />
+                          ) : (
+                            <Play size={16} />
+                          )}
+                        </div>
+                      )}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>

@@ -131,7 +131,8 @@ class AudioPlayer {
         this.updateState({
           isPlaying: true,
           currentUrl: url,
-          currentSong: songInfo
+          currentSong: songInfo,
+          isExpanded: true
         });
       }
     } else if (this.audioRef) {
@@ -182,6 +183,7 @@ class AudioPlayer {
   public async playTrack(index: number) {
     if (index >= 0 && index < this.state.playlist.length) {
       const track = this.state.playlist[index];
+      this.updateState({ currentTrackIndex: index });
       await this.play({
         url: track.url,
         songInfo: {
@@ -191,7 +193,6 @@ class AudioPlayer {
           palette: track.songInfo.palette
         }
       });
-      this.setExpanded(true);
     }
   }
 
