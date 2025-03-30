@@ -26,12 +26,12 @@ const Albums: FC = () => {
     };
 
     return (
-        <div className='albm flex flex-col pb-6 pt-4 px-4 mt-4 border-l-2 border-t-2 border-b-2 rounded-l-[50px] border-black w-full bg-amber-200'>
+        <div className='albm flex flex-col pb-6 pt-4 px-4 h-full w-full bg-amber-200'>
             <div className='album-title text-center text-2xl font-bold'>
                 Featured Albums
             </div>
             <div className="flex flex-wrap gap-8 mt-8 mb-8 w-full justify-center">
-                {albums.slice(0, 4).map((album) => (
+                {albums.map((album) => (
                     <VinylCover 
                         key={`${album.name}-${album.artist}`}
                         imageSrc={album.coverUrl}

@@ -15,11 +15,11 @@ function App() {
           <div className="w-[450px] min-w-[450px] mt-4 border-r border-border bg-background/80 backdrop-blur-sm">
             <Recommendations />
           </div>
-          <div className='hidden lg:block ml-2 area w-2/3'>
-          {/* Main content */}
-          <ScrollArea className="flex-1">
-            <Albums />
-          </ScrollArea>
+          <div className='hidden lg:block ml-2 mt-4 overflow-hidden w-2/3 area border-l-2 border-t-2 border-b-2 rounded-l-[50px] border-black'>
+            {/* Main content */}
+            <ScrollArea className="flex-1 h-full">
+              <Albums />
+            </ScrollArea>
           </div>
         </div>
       </main>
