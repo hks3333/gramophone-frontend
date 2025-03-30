@@ -22,14 +22,14 @@ const Recommendations: FC = () => {
     setRecommendedSongs(getRandomSongs());
   };
 
-  const handleSongClick = (song: typeof songs[0], index: number) => {
+  const handleSongClick = (index: number) => {
     // Create a playlist starting from the clicked song and including all remaining songs
-    const playlist = recommendedSongs.slice(index).map(song => ({
-      url: song.songUrl,
+    const playlist = recommendedSongs.slice(index).map(track => ({
+      url: track.songUrl,
       songInfo: {
-        name: song.name,
-        artist: song.artist,
-        coverUrl: song.coverUrl,
+        name: track.name,
+        artist: track.artist,
+        coverUrl: track.coverUrl,
         palette: [] // You might want to add palette colors later
       }
     }));
@@ -55,7 +55,7 @@ const Recommendations: FC = () => {
           <div 
             key={index} 
             className="recommendation-item"
-            onClick={() => handleSongClick(song, index)}
+            onClick={() => handleSongClick(index)}
           >
             <div className="recommendation-cover">
               <img 

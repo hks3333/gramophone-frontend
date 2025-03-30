@@ -241,13 +241,13 @@ export const PlayerDrawer = () => {
               {/* Main content */}
               <div className="flex flex-col items-center flex-1 gap-8 p-6">
                 {/* Album Art */}
-                <div className="w-78 h-74 rounded-lg overflow-hidden">
+                <div className="w-78 h-74 rounded-lg overflow-hidden ">
                   {!isImageLoaded && (
-                    <div className="w-full h-full">
+                    <div className="w-full h-full overflow-hidden">
                       <Blurhash
                         hash="LEHV6nWB2yk8pyo0adR*.7kCMdnj"
-                        width={256}
-                        height={256}
+                        width={512}
+                        height={512}
                         resolutionX={32}
                         resolutionY={32}
                         punch={1}
