@@ -10,16 +10,17 @@ function App() {
     <div className="flex flex-col h-screen">
       <Topbar />
       <main className="flex-1 overflow-hidden pt-24 pb-28">
-        <div className="flex h-full">
+        <div className="flex justify-between h-full">
           {/* Recommendations sidebar */}
-          <div className="hidden lg:block w-[450px] mt-4 border-r border-border bg-background/80 backdrop-blur-sm">
+          <div className="w-[450px] min-w-[450px] mt-4 border-r border-border bg-background/80 backdrop-blur-sm">
             <Recommendations />
           </div>
-          
+          <div className='hidden lg:block ml-2 area w-2/3'>
           {/* Main content */}
           <ScrollArea className="flex-1">
             <Albums />
           </ScrollArea>
+          </div>
         </div>
       </main>
       <PlayerDrawer />

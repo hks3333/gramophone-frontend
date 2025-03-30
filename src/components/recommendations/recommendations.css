@@ -4,7 +4,9 @@
   display: flex;
   flex-direction: column;
   background: var(--background);
-  border-radius: 0.5rem;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border: 2px solid black;
   overflow: hidden;
 }
 
@@ -83,7 +85,7 @@
 .recommendation-cover {
   width: 48px;
   height: 48px;
-  border-radius: 0.25rem;
+  /* border-radius: 0.25rem; */
   overflow: hidden;
   flex-shrink: 0;
 }

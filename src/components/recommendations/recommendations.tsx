@@ -39,7 +39,7 @@ const Recommendations: FC = () => {
   };
 
   return (
-    <div className="recommendations-container">
+    <div className="recommendations-container"> 
       <div className="recommendations-header">
         <h2 className="recommendations-title">Recommended for you</h2>
         <button 
