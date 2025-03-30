@@ -26,7 +26,7 @@ const Albums: FC = () => {
     };
 
     return (
-        <div className='albm flex flex-col pb-6 pt-4 px-4 mt-6'>
+        <div className='albm flex flex-col pb-6 pt-4 px-4 mt-6 z-40'>
             <div className='album-title text-center text-2xl font-bold'>
                 Featured Albums
             </div>

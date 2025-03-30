@@ -232,7 +232,7 @@ export const PlayerDrawer = () => {
               <div className="flex justify-end h-24 px-8">
                 <button 
                   onClick={() => setExpanded(false)}
-                  className="text-muted-foreground hover:text-foreground transition p-4 hover:opacity-70"
+                  className="hidden md:block text-muted-foreground hover:text-foreground transition p-4 hover:opacity-70"
                 >
                   <ChevronDown size={28} />
                 </button>
@@ -345,10 +345,12 @@ export const PlayerDrawer = () => {
             </div>
 
             {/* Right side - Playlist */}
-            <div className="hidden md:block w-96 border-l border-border bg-background/80 backdrop-blur-sm">
+            <div className="hidden lg:block w-96 border-l border-border bg-background/80 backdrop-blur-sm">
               <div className="h-full flex flex-col">
                 <div className="p-6 border-b border-border">
-                  <h3 className="text-lg font-semibold">{currentSong?.artist || 'Playlist'}</h3>
+                  <h3 className="text-lg font-semibold">
+                    {playlist.length > 1 ? 'Up Next' : (currentSong?.artist || 'Playlist')}
+                  </h3>
                 </div>
                 <div className="flex-1 overflow-y-auto">
                   <div className="p-6 space-y-2">
