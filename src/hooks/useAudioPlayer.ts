@@ -125,14 +125,16 @@ class AudioPlayer {
   public async play(options?: PlayOptions) {
     if (options) {
       const { url, songInfo } = options;
+      this.updateState({
+        isExpanded: true,
+        currentSong: songInfo
+      });
       await this.initializeAudio(url);
       if (this.audioRef) {
         await this.audioRef.play();
         this.updateState({
           isPlaying: true,
-          currentUrl: url,
-          currentSong: songInfo,
-          isExpanded: true
+          currentUrl: url
         });
       }
     } else if (this.audioRef) {
@@ -183,15 +185,14 @@ class AudioPlayer {
   public async playTrack(index: number) {
     if (index >= 0 && index < this.state.playlist.length) {
       const track = this.state.playlist[index];
-      this.updateState({ currentTrackIndex: index });
+      this.updateState({ 
+        currentTrackIndex: index,
+        isExpanded: true,
+        currentSong: track.songInfo
+      });
       await this.play({
         url: track.url,
-        songInfo: {
-          name: track.songInfo.name,
-          artist: track.songInfo.artist,
-          coverUrl: track.songInfo.coverUrl,
-          palette: track.songInfo.palette
-        }
+        songInfo: track.songInfo
       });
     }
   }
