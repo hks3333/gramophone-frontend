@@ -5,8 +5,46 @@
 } */
 
 .logo {
-    z-index: 10000;
-    /* padding: 0px 24px; */
     font-size:3.5rem;
     font-family: "Diplomata SC", serif;
+}
+
+.poster {
+    background-image: url("/design2.png");
+}
+
+.logo-div {
+    position: relative;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+}
+
+.logo-div::before,
+.logo-div::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    filter: blur(20px);
+    opacity: 0.8;
+    z-index: 0;
+}
+
+.logo-div::before {
+    background: radial-gradient(circle at center, #ff7c7c, transparent 70%);
+    top: -100px;
+    left: -50px;
+}
+
+.logo-div::after {
+    background: radial-gradient(circle at center, #ebf35e, transparent 70%);
+    bottom: -100px;
+    right: -50px;
+}
+
+.logo-div > * {
+    position: relative;
+    z-index: 1;
 }
