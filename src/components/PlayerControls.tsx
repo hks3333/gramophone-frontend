@@ -8,7 +8,7 @@ import "./playercontrols.css"
 import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 import { Blurhash } from "react-blurhash";
 import { GradientBackground } from '@/components/GradientBackground';
-import { Volume2, VolumeX, SkipBack, SkipForward, Play, Pause, ChevronUp } from 'lucide-react';
+import { Volume2, VolumeX, SkipBack, SkipForward, Play, Pause } from 'lucide-react';
 
 export const PlayerDrawer = () => {
   const [isExpanded, setIsExpanded] = useState(false);
