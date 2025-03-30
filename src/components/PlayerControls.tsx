@@ -110,7 +110,7 @@ export const PlayerDrawer = () => {
       >
         <DrawerTrigger asChild>
           {/* Mini Player */}
-          <div className="w-full border-t rounded-t-3xl p-2 cursor-pointer bg-background">
+          <div className="w-full border-t-2 border-black rounded-t-3xl p-2 cursor-pointer bg-background">
             <div className="flex items-center justify-between h-24 px-4">
               {/* Track Info */}
               <div className="flex items-center gap-3 min-w-0">
